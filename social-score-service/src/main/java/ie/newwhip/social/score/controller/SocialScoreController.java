@@ -34,7 +34,7 @@ public class SocialScoreController {
 
     @PatchMapping("update")
     public ResponseEntity<?> updateSocialScoreById(@RequestBody SocialScoreUpdateRequest request) {
-        socialScoreService.updateSocialScore(request.getKeyName(),request.getKeyValue(), request.getScore());
+        socialScoreService.updateSocialScore(request.getKeyName(),request.getKeyValue(), request.getUpdatedScore());
         return ResponseEntity.ok().build();
     }
 

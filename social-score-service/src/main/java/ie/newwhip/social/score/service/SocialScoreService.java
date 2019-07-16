@@ -8,7 +8,7 @@ import ie.newwhip.social.score.model.SocialScoreReport;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
-@Service
+
 public interface SocialScoreService {
     SocialScore save(SocialScore socialScoreRequest) throws SocialScoreException;
 

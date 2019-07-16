@@ -299,7 +299,7 @@ public class SocialScoreControllerTest {
         final SocialScoreUpdateRequest socialScoreRequest = new SocialScoreUpdateRequest();
         socialScoreRequest.setKeyValue("https://www.duckgo.com/search?query=soemthing");
         socialScoreRequest.setKeyName(KeyName.URL);
-        socialScoreRequest.setScore(20);
+        socialScoreRequest.setUpdatedScore(20);
         return ow.writeValueAsString(socialScoreRequest);
     }
 

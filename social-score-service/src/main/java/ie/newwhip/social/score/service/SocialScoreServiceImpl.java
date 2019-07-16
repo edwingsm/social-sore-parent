@@ -15,12 +15,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 
+@Service
 @Slf4j
 public class SocialScoreServiceImpl implements SocialScoreService {
 
@@ -96,15 +99,16 @@ public class SocialScoreServiceImpl implements SocialScoreService {
   private SocialScore findById(String id) {
     Optional<SocialScoreDBO> socialScoreDBO = socialScoreRepository.findById(id);
     socialScoreDBO
-        .orElseThrow(() -> new RuntimeException("Couldn't find Social score for the given Id"));
+        .orElseThrow(() -> new RuntimeException("Couldn't find Social updatedScore for the given Id"));
     return SocialScore.builder().socialScoreDBO(socialScoreDBO.get()).build();
   }
 
 
   private SocialScore findByUrl(String url) {
-    Optional<SocialScoreDBO> socialScoreDBO = socialScoreRepository.findByUrl(url);
+    final String decodedUrl = decodeUrl(url);
+    Optional<SocialScoreDBO> socialScoreDBO = socialScoreRepository.findByUrl(decodedUrl);
     socialScoreDBO
-        .orElseThrow(() -> new RuntimeException("Couldn't find Social score for the given url "));
+        .orElseThrow(() -> new RuntimeException("Couldn't find Social updatedScore for the given url "));
     return SocialScore.builder().socialScoreDBO(socialScoreDBO.get()).build();
   }
 
@@ -147,12 +151,9 @@ public class SocialScoreServiceImpl implements SocialScoreService {
 
   }
 
+  @SneakyThrows(UnsupportedEncodingException.class)
   private String decodeUrl(String encodedUrl) {
-    String url = encodedUrl;
-    try {
-      url = URLDecoder.decode(encodedUrl, StandardCharsets.UTF_8.name());
-    } catch (UnsupportedEncodingException e) {
-    }
+    final String url = URLDecoder.decode(encodedUrl, StandardCharsets.UTF_8.name());
     return url;
   }
 

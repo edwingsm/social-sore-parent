@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class SocialScoreUpdateRequest implements Serializable {
     private KeyName keyName;
     private String keyValue;
-    private long score;
+    private long updatedScore;
 }

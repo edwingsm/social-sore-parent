@@ -41,7 +41,7 @@ public class SocialScoreReportRepositoryImpl implements SocialScoreReportReposit
         Query searchUserQuery = new Query(Criteria.where(key).is(value));
         //SocialScoreDBO scoreDBO =mongoTemplate.findOne(searchUserQuery,SocialScoreDBO.class);
         UpdateResult updateResult =  mongoTemplate.updateFirst(searchUserQuery,
-                Update.update("score",score), SocialScoreDBO.class);
+                Update.update("updatedScore",score), SocialScoreDBO.class);
         return mongoTemplate.findOne(searchUserQuery, SocialScoreDBO.class);
     }
 }

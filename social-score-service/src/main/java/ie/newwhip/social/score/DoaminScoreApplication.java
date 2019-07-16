@@ -1,8 +1,14 @@
 package ie.newwhip.social.score;
 
+import ie.newwhip.social.score.mongodb.SocialScoreRepository;
+import ie.newwhip.social.score.mongodb.dbo.SocialScoreDBO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import java.net.URL;
@@ -27,11 +33,11 @@ public class DoaminScoreApplication implements CommandLineRunner {
         SpringApplication.run(DoaminScoreApplication.class, args);
     }
 
-//    @Autowired
-//    private MongoTemplate mongoTemplate;
-//
-//    @Autowired
-//    private SocialScoreRepository socialScoreRepository;
+    @Autowired
+    private MongoTemplate mongoTemplate;
+
+    @Autowired
+    private SocialScoreRepository socialScoreRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -72,36 +78,37 @@ public class DoaminScoreApplication implements CommandLineRunner {
                 System.out.println("EXPORT");
         }
 
-//        SocialScoreDBO google = new SocialScoreDBO();
-//        google.setUrl("http://www.google.com/search?query=something");
-//        google.setDomainName("www.google.com");
-//        google.setScore(20);
-//        google.setId(UUID.randomUUID().toString());
-//        mongoTemplate.save(google,"socialscore");
-//
-//
-//        SocialScoreDBO google2 = new SocialScoreDBO();
-//        google2.setUrl("http://www.google.com/search?query=somethingElse");
-//        google2.setDomainName("www.google.com");
-//        google2.setScore(15);
-//        google2.setId(UUID.randomUUID().toString());
-//        mongoTemplate.save(google2,"socialscore");
-//
-//        SocialScoreDBO fb = new SocialScoreDBO();
-//        fb.setUrl("http://www.fb.com/search?query=myfriends");
-//        fb.setDomainName("www.fb.com");
-//        fb.setScore(5);
-//        fb.setId(UUID.randomUUID().toString());
-//        mongoTemplate.save(fb,"socialscore");
-//
-//        SocialScoreDBO ret = new SocialScoreDBO();
-//        ret.setUrl("http://www.rte.ie/news-at-9");
-//        ret.setDomainName("www.rte.ie");
-//        ret.setScore(10);
-//        ret.setId(UUID.randomUUID().toString());
-//        mongoTemplate.save(ret,"socialscore");
-//
-//        Page<SocialScoreDBO> socialScoreDBOPage =socialScoreRepository.findByDomainName("www.google.com", Pageable.unpaged());
-//        socialScoreDBOPage.forEach(s->System.out.println(s.toString()));
+        SocialScoreDBO google = new SocialScoreDBO();
+        google.setUrl("http://www.google.com/search?query=something");
+        google.setDomainName("www.google.com");
+        google.setScore(20);
+        //google.setId(UUID.randomUUID().toString());
+        mongoTemplate.save(google,"socialscore");
+
+
+        SocialScoreDBO google2 = new SocialScoreDBO();
+        google2.setUrl("http://www.google.com/search?query=somethingElse");
+        google2.setDomainName("www.google.com");
+        google2.setScore(15);
+      //  google2.setId(UUID.randomUUID().toString());
+        mongoTemplate.save(google2,"socialscore");
+
+        SocialScoreDBO fb = new SocialScoreDBO();
+        fb.setUrl("http://www.fb.com/search?query=myfriends");
+        fb.setDomainName("www.fb.com");
+        fb.setScore(5);
+    //    fb.setId(UUID.randomUUID().toString());
+        mongoTemplate.save(fb,"socialscore");
+
+        SocialScoreDBO ret = new SocialScoreDBO();
+        ret.setUrl("http://www.rte.ie/news-at-9");
+        ret.setDomainName("www.rte.ie");
+        ret.setScore(10);
+       // ret.setId(UUID.randomUUID().toString());
+        mongoTemplate.save(ret,"socialscore");
+
+        Page<SocialScoreDBO> socialScoreDBOPage =socialScoreRepository.findByDomainName("www.google.com", Pageable
+            .unpaged());
+        socialScoreDBOPage.forEach(s->System.out.println(s.toString()));
     }
 }
