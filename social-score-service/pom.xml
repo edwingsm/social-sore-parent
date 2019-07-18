@@ -1,15 +1,17 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <groupId>ie.newwhip.social</groupId>
     <artifactId>social-score-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
 
-<artifactId>social-score-service</artifactId>
- <packaging>jar</packaging>
+  <artifactId>social-score-service</artifactId>
+  <packaging>jar</packaging>
 
   <name>social-score-service</name>
   <description>Demo project for Spring Boot</description>
@@ -22,7 +24,6 @@
     <maven.compiler.source>1.8</maven.compiler.source>
   </properties>
 
-
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -31,6 +32,11 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>social-score-core</artifactId>
+      <version>${project.version}</version>
     </dependency>
 
     <!--<dependency>-->
@@ -68,6 +74,21 @@
       <artifactId>de.flapdoodle.embed.mongo</artifactId>
       <!--<scope>test</scope>-->
     </dependency>
+    <dependency>
+      <groupId>org.springframework.restdocs</groupId>
+      <artifactId>spring-restdocs-mockmvc</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger2</artifactId>
+      <version>2.9.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-contract-verifier</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -81,11 +102,11 @@
         <artifactId>jacoco-maven-plugin</artifactId>
         <version>0.8.3</version>
         <configuration>
-<!--                    <excludes>-->
-<!--                      <exclude>com/**/Swagger*</exclude>-->
-<!--                      <exclude>com/Application*</exclude>-->
-<!--                      <exclude>com/Status*</exclude>-->
-<!--                    </excludes>-->
+          <!--                    <excludes>-->
+          <!--                      <exclude>com/**/Swagger*</exclude>-->
+          <!--                      <exclude>com/Application*</exclude>-->
+          <!--                      <exclude>com/Status*</exclude>-->
+          <!--                    </excludes>-->
         </configuration>
         <executions>
           <execution>
@@ -125,7 +146,18 @@
           </execution>
         </executions>
       </plugin>
+
+      <plugin>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-contract-maven-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <baseClassForTests>
+            BaseTestClass
+          </baseClassForTests>
+        </configuration>
+      </plugin>
+
     </plugins>
   </build>
 </project>
-
