@@ -33,5 +33,6 @@ I followed this approach based on following PROS
   
 ## Good To have
 
-- Security implementation .
-
+- Security implementation.
+- REST docs tests
+- Can use well tested command-line/console libraries for client 
