@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>ie.newwhip.social</groupId>
+    <groupId>ie.newship.social</groupId>
     <artifactId>social-score-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
